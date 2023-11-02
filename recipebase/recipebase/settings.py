@@ -31,7 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django_nextjs',
+    'channels',
+    'django_nextjs.apps.DjangoNextJSConfig',
 
     'recipes',
 
@@ -72,7 +73,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'recipebase.wsgi.application'
+ASGI_APPLICATION = "recipebase.asgi.application"
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

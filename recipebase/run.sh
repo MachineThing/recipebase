@@ -1,0 +1,1 @@
+daphne recipebase.asgi:application
