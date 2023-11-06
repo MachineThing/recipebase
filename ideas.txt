@@ -1,4 +1,0 @@
-next + django
-twemoji for emojis
-Markdown (via commonmark) formatting
-RSS feed from user profiles (in html or markdown)
