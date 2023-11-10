@@ -1,15 +1,22 @@
+import './global.css';
+import { Navbar } from './components/navbar';
+
 export const metadata = {
-    title: 'Next.js'
+    title: 'Recipebase'
 }
 
-export default function RootLayout({
+export default ({
     children,
 }: {
     children: React.ReactNode
-}) {
+}) => {
     return (
-        <html lang="en">
-            <body>{children}</body>
+        <html lang="en" data-bs-theme="dark">
+            <head></head>
+            <body>
+                <Navbar></Navbar>
+                <div>{children}</div>
+            </body>
         </html>
     )
 }
