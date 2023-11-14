@@ -11,11 +11,9 @@ export default ({
     children: React.ReactNode
 }) => {
     return (
-        <html lang="en" data-bs-theme="dark">
+        <html lang="en">
             <head></head>
-            <body>
-                <BodyWrapper>{children}</BodyWrapper>
-            </body>
+            <BodyWrapper>{children}</BodyWrapper>
         </html>
     )
 }

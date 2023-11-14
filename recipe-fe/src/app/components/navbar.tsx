@@ -1,11 +1,12 @@
 "use client"
 import Link from 'next/link';
 
-export const Navbar = (props: {navOpen: boolean, setOpen: Function}) => {
+export const Navbar = (props: {navOpen: boolean, setOpen: Function, setSNav: Function}) => {
     const prefixClasses = "transform duration-100 ease-linear"
     
     const handleClick = () => {
         props.setOpen(!props.navOpen)
+        props.setSNav(false)
         //console.log(props.navOpen ? "closed menu" : "opened menu")
     }
     

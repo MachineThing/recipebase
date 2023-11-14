@@ -7,6 +7,9 @@ module.exports = {
     extend: {
       opacity: {
         "65": ".65"
+      },
+      width: {
+        "navmenu": "33.333333vw"
       }
     },
   },
