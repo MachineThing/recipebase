@@ -2,7 +2,7 @@
 import { ReactNode, useState } from 'react';
 
 import { Navbar } from './navbar';
-import { NavMenu, NavMenuCategory } from './navmenu';
+import { NavMenu, SubNavMenu, NavMenuCategory } from './navmenu';
 
 const Overlay = (props: {enabled: Boolean, setOpen: Function, setSNav: Function}) => {
     const onClick = () => {
@@ -16,23 +16,21 @@ const Overlay = (props: {enabled: Boolean, setOpen: Function, setSNav: Function}
 
 export const BodyWrapper = (props: {children: ReactNode}) => {
     const [navOpen, setOpen]  = useState(false)
-    const [snavInfo, setSNav] = useState(false)
+    const [snavInfo, setSNav] = useState({"origin": "none", "items": null})
 
     return (
         <body className={(navOpen ? "overflow-hidden" : "")}>
             <Navbar navOpen={navOpen} setOpen={setOpen} setSNav={setSNav}></Navbar>
-            <NavMenu enabled={snavInfo!=false} snavInfo={snavInfo} zIndex={"z-40"}>
+            <SubNavMenu snavInfo={snavInfo}>
                 <p>hi</p>
-            </NavMenu>
+            </SubNavMenu>
             <NavMenu enabled={navOpen} zIndex={"z-30"}>
-                <ul>
-                    <NavMenuCategory setSNav={setSNav} name="Breakfast" items={null}/>
-                    <NavMenuCategory setSNav={setSNav} name="Lunch" items={null}/>
-                    <NavMenuCategory setSNav={setSNav} name="Dinner" items={null}/>
-                    <NavMenuCategory setSNav={setSNav} name="Dessert" items={null}/>
-                    <NavMenuCategory setSNav={setSNav} name="Cuisines" items={["Italian", "Mexican", "Chinese", "Japanese", "Indian", "Mediterranean", "Thai", "French", "Middle Eastern", "Greek"]}/>
-                    <NavMenuCategory setSNav={setSNav} name="Diets" items={["Vegan", "Vegetarian", "Keto", "Gluten-Free", "Paleolithic", "Low-Carb"]}/>
-                </ul>
+                <NavMenuCategory setSNav={setSNav} name="Breakfast" items={null}/>
+                <NavMenuCategory setSNav={setSNav} name="Lunch" items={null}/>
+                <NavMenuCategory setSNav={setSNav} name="Dinner" items={null}/>
+                <NavMenuCategory setSNav={setSNav} name="Dessert" items={null}/>
+                <NavMenuCategory setSNav={setSNav} name="Cuisines" items={["Italian", "Mexican", "Chinese", "Japanese", "Indian", "Mediterranean", "Thai", "French", "Middle Eastern", "Greek"]}/>
+                <NavMenuCategory setSNav={setSNav} name="Diets" items={["Vegan", "Vegetarian", "Keto", "Gluten-Free", "Paleolithic", "Low-Carb"]}/>
             </NavMenu>
             <Overlay enabled={navOpen} setOpen={setOpen} setSNav={setSNav}/>
             <div className="p-2">{props.children}</div>
