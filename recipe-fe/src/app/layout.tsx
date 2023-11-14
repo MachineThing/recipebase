@@ -1,5 +1,5 @@
+import { BodyWrapper } from './components/bodyWrapper';
 import './global.css';
-import { Navbar } from './components/navbar';
 
 export const metadata = {
     title: 'Recipebase'
@@ -14,8 +14,7 @@ export default ({
         <html lang="en" data-bs-theme="dark">
             <head></head>
             <body>
-                <Navbar></Navbar>
-                <div>{children}</div>
+                <BodyWrapper>{children}</BodyWrapper>
             </body>
         </html>
     )
