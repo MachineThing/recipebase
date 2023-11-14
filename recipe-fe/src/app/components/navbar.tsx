@@ -16,7 +16,7 @@ export const Navbar = (props: {navOpen: boolean, setOpen: Function}) => {
     let isClickedNum: number = (props.navOpen ? 1 : 0)
 
     return (
-        <nav className="bg-orange-100 p-1 sticky top-0 shadow-lg">
+        <nav className="bg-orange-100 p-1 sticky top-0 shadow-lg z-20">
             <div className="text-xl">
                 <button className="mr-2 p-3 inline-block align-middle" onClick={handleClick}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="23" height="23">
