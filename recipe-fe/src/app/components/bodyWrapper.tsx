@@ -1,5 +1,5 @@
 "use client"
-import { MouseEventHandler, ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 import { Navbar } from './navbar';
 import { NavMenu, SubNavMenu, NavMenuCategory } from './navmenu';

@@ -3,7 +3,7 @@
 import { Url } from 'next/dist/shared/lib/router/router';
 import Link from 'next/link';
 
-import { MouseEventHandler, ReactNode } from "react"
+import { ReactNode } from "react"
 
 import { closePropagateType } from './bodyWrapper';
 
