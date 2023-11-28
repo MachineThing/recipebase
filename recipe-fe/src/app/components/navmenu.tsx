@@ -3,7 +3,7 @@
 import { Url } from 'next/dist/shared/lib/router/router';
 import Link from 'next/link';
 
-import { ReactNode } from "react"
+import { MouseEventHandler, ReactNode } from "react"
 
 ////////////////////////
 // NavMenu Categories //
@@ -28,10 +28,10 @@ export const NavMenuCategory = (props: {name: String, setSNav: Function, items: 
     )
 }
 
-const NavMenuLink = (props: {name: String, href: Url}) => {
+const NavMenuLink = (props: {name: String, href: Url, closePropagate: MouseEventHandler}) => {
     return (
         <li className="cursor-pointer">
-            <Link href={props.href} className="mx-2 py-2 border-b-2 justify-between flex items-center">
+            <Link href={props.href} onClick={props.closePropagate} className="mx-2 py-2 border-b-2 justify-between flex items-center">
                 {props.name}
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="23" height="23">
                     <path strokeLinecap="round" strokeWidth="2" stroke="black" fill="none" d="M11.5 4 L18 11.5 L11.5 20"/>
@@ -45,9 +45,10 @@ const NavMenuLink = (props: {name: String, href: Url}) => {
 // Nav Menus //
 ///////////////
 
-export const NavMenu = (props: {children: ReactNode, enabled: Boolean, zIndex: String}) => {
+export const NavMenu = (props: {children: ReactNode, enabled: Boolean, zIndex: String, closePropagate: MouseEventHandler}) => {
     return (
         <div className={"w-navmenu h-screen bg-white fixed transform duration-300 ease-in-out"+(props.enabled ? " left-0 " : " -left-1/3 ")+props.zIndex}>
+            <p onClick={props.closePropagate}>Back!</p>
             <ul>
                 {props.children}
             </ul>
@@ -55,16 +56,16 @@ export const NavMenu = (props: {children: ReactNode, enabled: Boolean, zIndex: S
     )
 }
 
-export const SubNavMenu = (props: {children?: ReactNode, snavInfo: {"origin": string, "items": String[] | null}}) => {
+export const SubNavMenu = (props: {children?: ReactNode, snavInfo: {"origin": string, "items": String[] | null}, closePropagate: MouseEventHandler}) => {
     let renderItems
     
     if (props.snavInfo["items"] != null) {
         renderItems = props.snavInfo["items"].map((item: String, Index: number) => {
-            return <NavMenuLink name={item} key={Index} href={`/browse?o=${encodeURI(props.snavInfo["origin"].toLowerCase())}&c=${encodeURI(item.toLowerCase())}`}/>
+            return <NavMenuLink name={item} key={Index} href={`/browse?o=${encodeURI(props.snavInfo["origin"].toLowerCase())}&c=${encodeURI(item.toLowerCase())}`} closePropagate={props.closePropagate}/>
         })
     }
     return (
-        <NavMenu enabled={props.snavInfo["items"]!=null} zIndex={"z-40"}>
+        <NavMenu enabled={props.snavInfo["items"]!=null} zIndex={"z-40"} closePropagate={props.closePropagate}>
             {renderItems}
         </NavMenu>
     )
