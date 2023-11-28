@@ -4,24 +4,34 @@ import { MouseEventHandler, ReactNode, useState } from 'react';
 import { Navbar } from './navbar';
 import { NavMenu, SubNavMenu, NavMenuCategory } from './navmenu';
 
-const Overlay = (props: {enabled: Boolean, closePropagate: MouseEventHandler}) => {
+export enum closePropagateType {
+    navButton,
+    subNav,
+    nav
+}
+
+const Overlay = (props: {enabled: Boolean, closePropagate: Function}) => {
     return (
-        <div className={"z-10 h-screen w-screen fixed bg-black transform duration-300 ease-linear " + (props.enabled ? "opacity-65 cursor-pointer" : "pointer-events-none opacity-0")} onClick={props.closePropagate}></div>
+        <div className={"z-10 h-screen w-screen fixed bg-black transform duration-300 ease-linear " + (props.enabled ? "opacity-65 cursor-pointer" : "pointer-events-none opacity-0")} onClick={()=>{props.closePropagate()}}></div>
     )
 }
 
 export const BodyWrapper = (props: {children: ReactNode}) => {
     const [navOpen, setOpen]  = useState(false)
-    const [snavInfo, setSNav] = useState({"origin": "none", "items": null})
+    const [snavInfo, setSNav] = useState({"origin": "none", "items": [""], "enabled": false})
 
-    const closePropigate: MouseEventHandler = () => {
-        setOpen(false)
-        setSNav({"origin": "none", "items": null})
+    const closePropigate: Function = (type: closePropagateType) => {
+        if (type == closePropagateType.navButton) {
+            setOpen(!navOpen)
+        } else {
+            setOpen(false)
+        }
+        setSNav({"origin": snavInfo["origin"], "items": snavInfo["items"], "enabled": false})
     }
 
     return (
         <body className={(navOpen ? "overflow-hidden" : "")}>
-            <Navbar navOpen={navOpen} setOpen={setOpen} setSNav={setSNav}></Navbar>
+            <Navbar navOpen={navOpen} closePropagate={closePropigate}></Navbar>
             <SubNavMenu snavInfo={snavInfo} closePropagate={closePropigate}>
                 <p>hi</p>
             </SubNavMenu>

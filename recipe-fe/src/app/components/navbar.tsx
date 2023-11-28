@@ -1,12 +1,13 @@
 "use client"
 import Link from 'next/link';
 
-export const Navbar = (props: {navOpen: boolean, setOpen: Function, setSNav: Function}) => {
+import { closePropagateType } from './bodyWrapper';
+
+export const Navbar = (props: {navOpen: boolean, closePropagate: Function}) => {
     const prefixClasses = "transform duration-100 ease-linear"
     
     const handleClick = () => {
-        props.setOpen(!props.navOpen)
-        props.setSNav(false)
+        props.closePropagate(closePropagateType.navButton)
         //console.log(props.navOpen ? "closed menu" : "opened menu")
     }
     
